@@ -8,6 +8,10 @@ https://getcomposer.org/
 "repositories": [
     {
         "type": "vcs",
+        "url": "https://github.com/Artcustomer/apiunit"
+    },
+    {
+        "type": "vcs",
         "url": "https://github.com/Artcustomer/api-openai_client"
     }
 ],
