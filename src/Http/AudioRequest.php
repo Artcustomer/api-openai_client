@@ -25,6 +25,16 @@ class AudioRequest extends ApiRequest
     }
 
     /**
+     * PreExecute callback
+     *
+     * @return void
+     */
+    public function preExecute(): void
+    {
+        // Disable parent behaviour
+    }
+
+    /**
      * Build Uri
      *
      * @return void
@@ -36,6 +46,18 @@ class AudioRequest extends ApiRequest
         if (!empty($this->endpoint)) {
             $this->uri = sprintf('%s/%s', $this->uri, $this->endpoint);
         }
+    }
+
+    /**
+     * Build headers
+     *
+     * @return void
+     */
+    protected function buildHeaders(): void
+    {
+        parent::buildHeaders();
+
+        unset($this->headers['Content-Type']);
     }
 
     /**
@@ -55,6 +77,23 @@ class AudioRequest extends ApiRequest
      */
     private function extendParams(): void
     {
+        if (isset($this->body['file'])) {
+            $bodyFile = $this->body['file'];
+            $curlFile = null;
 
+            if (is_string($bodyFile)) {
+                $curlFile = new \CURLFile($bodyFile);
+            } else if (is_array($bodyFile)) {
+                $curlFile = new \CURLFile(
+                    $bodyFile['pathName'] ?? '',
+                    $bodyFile['mimeType'] ?? '',
+                    $bodyFile['originalName'] ?? ''
+                );
+            }
+
+            if ($curlFile !== null) {
+                $this->body['file'] = $curlFile;
+            }
+        }
     }
 }
