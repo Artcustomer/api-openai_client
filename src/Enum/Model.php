@@ -14,11 +14,13 @@ class Model
     public const CURIE = 'curie';
     public const DAVINCI = 'davinci';
     public const GPT_3_5_TURBO = 'gpt-3.5-turbo';
-    public const GPT_3_5_TURBO_0301 = 'gpt-3.5-turbo-0301';
+    public const GPT_3_5_TURBO_0613 = 'gpt-3.5-turbo-0613';
+    public const GPT_3_5_TURBO_16K = 'gpt-3.5-turbo-16k';
+    public const GPT_3_5_TURBO_16K_0613 = 'gpt-3.5-turbo-16k-0613';
     public const GPT_4 = 'gpt-4';
-    public const GPT_4_0314 = 'gpt-4-0314';
+    public const GPT_4_0613 = 'gpt-4-0613';
     public const GPT_4_32K = 'gpt-4-32k';
-    public const GPT_4_32K_0314 = 'gpt-4-32k-0314';
+    public const GPT_4_32K_0613 = 'gpt-4-32k-0613';
     public const WHISPER_1 = 'whisper-1';
     public const TEXT_ADA_001 = 'text-ada-001';
     public const TEXT_BABBAGE_001 = 'text-babbage-001';
@@ -38,11 +40,13 @@ class Model
     {
         return [
             self::GPT_4,
-            self::GPT_4_0314,
+            self::GPT_4_0613,
             self::GPT_4_32K,
-            self::GPT_4_32K_0314,
+            self::GPT_4_32K_0613,
             self::GPT_3_5_TURBO,
-            self::GPT_3_5_TURBO_0301
+            self::GPT_3_5_TURBO_0613,
+            self::GPT_3_5_TURBO_16K,
+            self::GPT_3_5_TURBO_16K_0613
         ];
     }
 
