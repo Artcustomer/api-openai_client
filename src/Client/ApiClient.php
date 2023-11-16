@@ -14,28 +14,20 @@ use Artcustomer\OpenAIClient\Utils\ApiTools;
 class ApiClient extends CurlApiClient
 {
 
+    public const CONFIG_USE_DECORATOR = 'useDecorator';
+
     /**
      * Constructor
      *
-     * This client is configured to return response as objects.
-     * It helps to manipulate data before encoding items to json format.
+     *  This client is configured to return response as objects.
+     *  It helps to manipulate data before encoding items to json format.
      *
      * @param array $params
-     * @param bool $useDecorator
+     * @param array $clientConfig
      */
-    public function __construct(array $params, bool $useDecorator = false)
+    public function __construct(array $params, array $clientConfig = [])
     {
-        parent::__construct($params);
-
-        if ($useDecorator) {
-            $this->responseDecoratorClassName = ResponseDecorator::class;
-            $this->responseDecoratorArguments = [ApiTools::CONTENT_TYPE_OBJECT];
-        }
-
-        $this->enableListeners = true;
-        $this->enableEvents = false;
-        $this->enableMocks = false;
-        $this->debugMode = false;
+        parent::__construct($params, $clientConfig);
     }
 
     /**
@@ -48,6 +40,19 @@ class ApiClient extends CurlApiClient
     {
         $this->init();
         $this->checkParams();
+    }
+
+    /**
+     * @return void
+     */
+    protected function setupClient(): void
+    {
+        $useDecorator = $this->clientConfig[self::CONFIG_USE_DECORATOR] ?? false;
+
+        if ($useDecorator) {
+            $this->responseDecoratorClassName = ResponseDecorator::class;
+            $this->responseDecoratorArguments = [ApiTools::CONTENT_TYPE_OBJECT];
+        }
     }
 
     /**
@@ -73,11 +78,11 @@ class ApiClient extends CurlApiClient
      */
     private function checkParams(): void
     {
-        $requiredParams = ['protocol', 'host', 'version'];
+        $requiredParams = [ApiTools::PARAM_PROTOCOL, ApiTools::PARAM_HOST, ApiTools::PARAM_VERSION];
 
         if (
-            !isset($this->apiParams['availability']) ||
-            $this->apiParams['availability'] !== true
+            !isset($this->apiParams[ApiTools::PARAM_AVAILABILITY]) ||
+            $this->apiParams[ApiTools::PARAM_AVAILABILITY] !== true
         ) {
             throw new \Exception('API is not available', 500);
         }
