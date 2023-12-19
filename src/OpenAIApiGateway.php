@@ -7,12 +7,10 @@ use Artcustomer\ApiUnit\Http\IApiResponse;
 use Artcustomer\OpenAIClient\Client\ApiClient;
 use Artcustomer\OpenAIClient\Connector\AudioConnector;
 use Artcustomer\OpenAIClient\Connector\ChatConnector;
-use Artcustomer\OpenAIClient\Connector\CompletionConnector;
-use Artcustomer\OpenAIClient\Connector\EditConnector;
 use Artcustomer\OpenAIClient\Connector\EmbeddingConnector;
 use Artcustomer\OpenAIClient\Connector\EngineConnector;
 use Artcustomer\OpenAIClient\Connector\FileConnector;
-use Artcustomer\OpenAIClient\Connector\FineTuneConnector;
+use Artcustomer\OpenAIClient\Connector\FineTuningConnector;
 use Artcustomer\OpenAIClient\Connector\ImageConnector;
 use Artcustomer\OpenAIClient\Connector\ModelConnector;
 use Artcustomer\OpenAIClient\Connector\ModerationConnector;
@@ -27,12 +25,10 @@ class OpenAIApiGateway extends AbstractApiGateway
 
     private AudioConnector $audioConnector;
     private ChatConnector $chatConnector;
-    private CompletionConnector $completionConnector;
-    private EditConnector $editConnector;
     private EmbeddingConnector $embeddingConnector;
     private EngineConnector $engineConnector;
     private FileConnector $fileConnector;
-    private FineTuneConnector $fineTuneConnector;
+    private FineTuningConnector $fineTuningConnector;
     private ImageConnector $imageConnector;
     private ModelConnector $modelConnector;
     private ModerationConnector $moderationConnector;
@@ -94,16 +90,6 @@ class OpenAIApiGateway extends AbstractApiGateway
     }
 
     /**
-     * Get CompletionConnector instance
-     *
-     * @return CompletionConnector
-     */
-    public function getCompletionConnector(): CompletionConnector
-    {
-        return $this->completionConnector;
-    }
-
-    /**
      * Get ChatConnector instance
      *
      * @return ChatConnector
@@ -111,16 +97,6 @@ class OpenAIApiGateway extends AbstractApiGateway
     public function getChatConnector(): ChatConnector
     {
         return $this->chatConnector;
-    }
-
-    /**
-     * Get EditConnector instance
-     *
-     * @return EditConnector
-     */
-    public function getEditConnector(): EditConnector
-    {
-        return $this->editConnector;
     }
 
     /**
@@ -164,13 +140,13 @@ class OpenAIApiGateway extends AbstractApiGateway
     }
 
     /**
-     * Get FineTuneConnector instance
+     * Get FineTuningConnector instance
      *
-     * @return FineTuneConnector
+     * @return FineTuningConnector
      */
-    public function getFineTuneConnector(): FineTuneConnector
+    public function getFineTuningConnector(): FineTuningConnector
     {
-        return $this->fineTuneConnector;
+        return $this->fineTuningConnector;
     }
 
     /**
@@ -212,12 +188,10 @@ class OpenAIApiGateway extends AbstractApiGateway
     {
         $this->audioConnector = new AudioConnector($this->client);
         $this->chatConnector = new ChatConnector($this->client);
-        $this->completionConnector = new CompletionConnector($this->client);
-        $this->editConnector = new EditConnector($this->client);
         $this->embeddingConnector = new EmbeddingConnector($this->client);
         $this->engineConnector = new EngineConnector($this->client);
         $this->fileConnector = new FileConnector($this->client);
-        $this->fineTuneConnector = new FineTuneConnector($this->client);
+        $this->fineTuningConnector = new FineTuningConnector($this->client);
         $this->imageConnector = new ImageConnector($this->client);
         $this->modelConnector = new ModelConnector($this->client);
         $this->moderationConnector = new ModerationConnector($this->client);

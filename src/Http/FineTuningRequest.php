@@ -7,7 +7,7 @@ use Artcustomer\OpenAIClient\Utils\ApiEndpoints;
 /**
  * @author David
  */
-class EditRequest extends ApiRequest
+class FineTuningRequest extends ApiRequest
 {
 
     /**
@@ -31,7 +31,11 @@ class EditRequest extends ApiRequest
      */
     protected function buildUri(): void
     {
-        $this->uri = sprintf('%s/%s', $this->uriBase, ApiEndpoints::EDITS);
+        $this->uri = sprintf('%s/%s', $this->uriBase, ApiEndpoints::FINE_TUNING);
+
+        if (!empty($this->endpoint)) {
+            $this->uri = sprintf('%s/%s', $this->uri, $this->endpoint);
+        }
     }
 
     /**

@@ -18,9 +18,10 @@ class ApiEndpoints
     public const ENGINES = 'engines';
     public const EVENTS = 'events';
     public const FILES = 'files';
-    public const FINE_TUNES = 'fine-tunes';
+    public const FINE_TUNING = 'fine_tuning';
     public const GENERATIONS = 'generations';
     public const IMAGES = 'images';
+    public const JOBS = 'jobs';
     public const MODELS = 'models';
     public const MODERATIONS = 'moderations';
     public const TRANSCRIPTIONS = 'transcriptions';
