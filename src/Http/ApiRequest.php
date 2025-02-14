@@ -10,11 +10,14 @@ use Artcustomer\ApiUnit\Http\CurlApiRequest;
 class ApiRequest extends CurlApiRequest
 {
 
-    private string $protocol;
-    private string $host;
-    private string $version;
-    private string $apiKey;
-    private string $organisation;
+    protected const AUTH_TYPE_BEARER = 'Bearer';
+
+    protected string $protocol;
+    protected string $host;
+    protected string $version;
+    protected string $apiKey;
+    protected string $adminApiKey;
+    protected string $organisation;
     protected string $uriBase;
 
     /**
@@ -49,6 +52,10 @@ class ApiRequest extends CurlApiRequest
 
         if (array_key_exists('api_key', $apiParams)) {
             $this->apiKey = $apiParams['api_key'];
+        }
+
+        if (array_key_exists('admin_api_key', $apiParams)) {
+            $this->adminApiKey = $apiParams['admin_api_key'];
         }
 
         if (array_key_exists('organisation', $apiParams)) {
@@ -103,7 +110,7 @@ class ApiRequest extends CurlApiRequest
     protected function buildHeaders(): void
     {
         $this->headers['Content-Type'] = 'application/json';
-        $this->headers['Authorization'] = sprintf('Bearer %s', $this->apiKey);
+        $this->headers['Authorization'] = $this->getAuthorization();
 
         if (!empty($this->organisation)) {
             $this->headers['OpenAI-Organization'] = $this->organisation;
@@ -118,5 +125,15 @@ class ApiRequest extends CurlApiRequest
     protected function buildUri(): void
     {
         $this->uri = sprintf('%s/%s', $this->uriBase, $this->endpoint);
+    }
+
+    /**
+     * Get authorization
+     *
+     * @return string
+     */
+    protected function getAuthorization(): string
+    {
+        return sprintf('%s %s', self::AUTH_TYPE_BEARER, $this->apiKey);
     }
 }

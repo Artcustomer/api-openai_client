@@ -6,15 +6,15 @@ use Artcustomer\ApiUnit\Client\AbstractApiClient;
 use Artcustomer\ApiUnit\Connector\AbstractConnector;
 use Artcustomer\ApiUnit\Http\IApiResponse;
 use Artcustomer\ApiUnit\Utils\ApiMethodTypes;
+use Artcustomer\OpenAIClient\Http\AdministrationRequest;
 use Artcustomer\OpenAIClient\Http\UsageRequest;
+use Artcustomer\OpenAIClient\Utils\ApiEndpoints;
 
 /**
  * @author David
  */
 class UsageConnector extends AbstractConnector
 {
-
-    private const DATE_FORMAT = 'Y-m-d';
 
     /**
      * Constructor
@@ -27,21 +27,111 @@ class UsageConnector extends AbstractConnector
     }
 
     /**
-     * Get usage
+     * Get completions usage
      *
      * @param \DateTime $dateTime
+     * @param int $limit
      * @return IApiResponse
      */
-    public function get(\DateTime $dateTime): IApiResponse
+    public function getCompletions(\DateTime $dateTime, int $limit = 1): IApiResponse
     {
         $data = [
             'method' => ApiMethodTypes::GET,
-            'endpoint' => '',
+            'endpoint' => ApiEndpoints::COMPLETIONS,
             'query' => [
-                'date' => $dateTime->format(self::DATE_FORMAT)
+                'start_time' => $dateTime->getTimestamp(),
+                'limit' => $limit
             ]
         ];
         $request = $this->client->getRequestFactory()->instantiate(UsageRequest::class, [$data]);
+
+        return $this->client->executeRequest($request);
+    }
+
+    /**
+     * Get embeddings usage
+     *
+     * @param \DateTime $dateTime
+     * @param int $limit
+     * @return IApiResponse
+     */
+    public function getEmbeddings(\DateTime $dateTime, int $limit = 1): IApiResponse
+    {
+        $data = [
+            'method' => ApiMethodTypes::GET,
+            'endpoint' => ApiEndpoints::EMBEDDINGS,
+            'query' => [
+                'start_time' => $dateTime->getTimestamp(),
+                'limit' => $limit
+            ]
+        ];
+        $request = $this->client->getRequestFactory()->instantiate(UsageRequest::class, [$data]);
+
+        return $this->client->executeRequest($request);
+    }
+
+    /**
+     * Get moderations usage
+     *
+     * @param \DateTime $dateTime
+     * @param int $limit
+     * @return IApiResponse
+     */
+    public function getModerations(\DateTime $dateTime, int $limit = 1): IApiResponse
+    {
+        $data = [
+            'method' => ApiMethodTypes::GET,
+            'endpoint' => ApiEndpoints::MODERATIONS,
+            'query' => [
+                'start_time' => $dateTime->getTimestamp(),
+                'limit' => $limit
+            ]
+        ];
+        $request = $this->client->getRequestFactory()->instantiate(UsageRequest::class, [$data]);
+
+        return $this->client->executeRequest($request);
+    }
+
+    /**
+     * Get images usage
+     *
+     * @param \DateTime $dateTime
+     * @param int $limit
+     * @return IApiResponse
+     */
+    public function getImages(\DateTime $dateTime, int $limit = 1): IApiResponse
+    {
+        $data = [
+            'method' => ApiMethodTypes::GET,
+            'endpoint' => ApiEndpoints::IMAGES,
+            'query' => [
+                'start_time' => $dateTime->getTimestamp(),
+                'limit' => $limit
+            ]
+        ];
+        $request = $this->client->getRequestFactory()->instantiate(UsageRequest::class, [$data]);
+
+        return $this->client->executeRequest($request);
+    }
+
+    /**
+     * Get costs
+     *
+     * @param \DateTime $dateTime
+     * @param int $limit
+     * @return IApiResponse
+     */
+    public function getCosts(\DateTime $dateTime, int $limit = 7): IApiResponse
+    {
+        $data = [
+            'method' => ApiMethodTypes::GET,
+            'endpoint' => ApiEndpoints::COSTS,
+            'query' => [
+                'start_time' => $dateTime->getTimestamp(),
+                'limit' => $limit
+            ]
+        ];
+        $request = $this->client->getRequestFactory()->instantiate(AdministrationRequest::class, [$data]);
 
         return $this->client->executeRequest($request);
     }

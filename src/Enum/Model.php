@@ -39,6 +39,10 @@ class Model
     public const GPT_4O_2024_08_06 = 'gpt-4o-2024-08-06';
     public const GPT_4O_MINI = 'gpt-4o-mini';
     public const GPT_4O_MINI_2024_07_18 = 'gpt-4o-mini-2024-07-18';
+    public const GPT_4O_MINI_REALTIME_PREVIEW_2024_12_17 = 'gpt-4o-mini-realtime-preview-2024-12-17';
+    public const GPT_4O_REALTIME_PREVIEW = 'gpt-4o-realtime-preview';
+    public const GPT_4O_REALTIME_PREVIEW_2024_10_01 = 'gpt-4o-realtime-preview-2024-10-01';
+    public const GPT_4O_REALTIME_PREVIEW_2024_12_17 = 'gpt-4o-realtime-preview-2024-12-17';
     public const TEXT_EMBEDDING_3_LARGE = 'text-embedding-3-large';
     public const TEXT_EMBEDDING_3_SMALL = 'text-embedding-3-small';
     public const TEXT_EMBEDDING_ADA_002 = 'text-embedding-ada-002';
@@ -119,30 +123,10 @@ class Model
     public static function fineTuning(): array
     {
         return [
-            self::BABBAGE_002,
-            self::DAVINCI_002,
             self::GPT_4O,
-            self::GPT_4O_2024_05_13,
-            self::GPT_4O_2024_08_06,
             self::GPT_4O_MINI,
-            self::GPT_4O_MINI_2024_07_18,
             self::GPT_3_5_TURBO,
-            self::GPT_3_5_TURBO_INSCTRUCT,
-            self::GPT_3_5_TURBO_INSCTRUCT_0914,
-            self::GPT_3_5_TURBO_0125,
-            self::GPT_3_5_TURBO_0613,
-            self::GPT_3_5_TURBO_1106,
-            self::GPT_3_5_TURBO_16K,
-            self::GPT_3_5_TURBO_16K_0613,
-            self::GPT_4,
-            self::GPT_4_0125_PREVIEW,
-            self::GPT_4_1106_PREVIEW,
-            self::GPT_4_0613,
-            self::GPT_4_32K,
-            self::GPT_4_32K_0613,
-            self::GPT_4_TURBO,
-            self::GPT_4_TURBO_PREVIEW,
-            self::GPT_4_TURBO_2024_04_09,
+            self::GPT_4
         ];
     }
 
@@ -208,6 +192,19 @@ class Model
             self::GPT_4_TURBO,
             self::GPT_4_TURBO_PREVIEW,
             self::GPT_4_TURBO_2024_04_09
+        ];
+    }
+
+    /**
+     * Get models for realtime
+     *
+     * @return string[]
+     */
+    public static function realtime(): array
+    {
+        return [
+            self::GPT_4O_REALTIME_PREVIEW,
+            self::GPT_4O_REALTIME_PREVIEW_2024_10_01
         ];
     }
 }

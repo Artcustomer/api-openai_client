@@ -7,7 +7,7 @@ use Artcustomer\OpenAIClient\Utils\ApiEndpoints;
 /**
  * @author David
  */
-class UsageRequest extends AdministrationRequest
+class UserRequest extends AdministrationRequest
 {
 
     /**
@@ -28,8 +28,8 @@ class UsageRequest extends AdministrationRequest
     protected function buildUri(): void
     {
         $this->endpoint = !empty($this->endpoint) ?
-            sprintf('%s/%s', ApiEndpoints::USAGE, $this->endpoint) :
-            ApiEndpoints::USAGE;
+            sprintf('%s/%s', ApiEndpoints::USERS, $this->endpoint) :
+            ApiEndpoints::USERS;
 
         parent::buildUri();
     }

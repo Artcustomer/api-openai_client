@@ -5,7 +5,9 @@ namespace Artcustomer\OpenAIClient;
 use Artcustomer\ApiUnit\Gateway\AbstractApiGateway;
 use Artcustomer\ApiUnit\Http\IApiResponse;
 use Artcustomer\OpenAIClient\Client\ApiClient;
+use Artcustomer\OpenAIClient\Connector\AssistantConnector;
 use Artcustomer\OpenAIClient\Connector\AudioConnector;
+use Artcustomer\OpenAIClient\Connector\BatchConnector;
 use Artcustomer\OpenAIClient\Connector\ChatConnector;
 use Artcustomer\OpenAIClient\Connector\EmbeddingConnector;
 use Artcustomer\OpenAIClient\Connector\EngineConnector;
@@ -14,6 +16,8 @@ use Artcustomer\OpenAIClient\Connector\FineTuningConnector;
 use Artcustomer\OpenAIClient\Connector\ImageConnector;
 use Artcustomer\OpenAIClient\Connector\ModelConnector;
 use Artcustomer\OpenAIClient\Connector\ModerationConnector;
+use Artcustomer\OpenAIClient\Connector\RealtimeConnector;
+use Artcustomer\OpenAIClient\Connector\ThreadConnector;
 use Artcustomer\OpenAIClient\Connector\UsageConnector;
 use Artcustomer\OpenAIClient\Utils\ApiInfos;
 
@@ -24,6 +28,8 @@ class OpenAIApiGateway extends AbstractApiGateway
 {
 
     private AudioConnector $audioConnector;
+    private AssistantConnector $assistantConnector;
+    private BatchConnector $batchConnector;
     private ChatConnector $chatConnector;
     private EmbeddingConnector $embeddingConnector;
     private EngineConnector $engineConnector;
@@ -32,9 +38,12 @@ class OpenAIApiGateway extends AbstractApiGateway
     private ImageConnector $imageConnector;
     private ModelConnector $modelConnector;
     private ModerationConnector $moderationConnector;
+    private RealtimeConnector $realtimeConnector;
+    private ThreadConnector $threadConnector;
     private UsageConnector $usageConnector;
 
     private string $apiKey;
+    private string $adminApiKey;
     private string $organisation;
     private bool $availability;
 
@@ -42,13 +51,15 @@ class OpenAIApiGateway extends AbstractApiGateway
      * Constructor
      *
      * @param string $apiKey
+     * @param string $adminApiKey
      * @param string $organisation
      * @param bool $availability
      * @throws \ReflectionException
      */
-    public function __construct(string $apiKey, string $organisation, bool $availability)
+    public function __construct(string $apiKey, string $adminApiKey = '', string $organisation = '', bool $availability = true)
     {
         $this->apiKey = $apiKey;
+        $this->adminApiKey = $adminApiKey;
         $this->organisation = $organisation;
         $this->availability = $availability;
 
@@ -180,6 +191,46 @@ class OpenAIApiGateway extends AbstractApiGateway
     }
 
     /**
+     * Get AssistantConnector instance
+     *
+     * @return AssistantConnector
+     */
+    public function getAssistantConnector(): AssistantConnector
+    {
+        return $this->assistantConnector;
+    }
+
+    /**
+     * Get BatchConnector instance
+     *
+     * @return BatchConnector
+     */
+    public function getBatchConnector(): BatchConnector
+    {
+        return $this->batchConnector;
+    }
+
+    /**
+     * Get RealtimeConnector instance
+     *
+     * @return RealtimeConnector
+     */
+    public function getRealtimeConnector(): RealtimeConnector
+    {
+        return $this->realtimeConnector;
+    }
+
+    /**
+     * Get ThreadConnector instance
+     *
+     * @return ThreadConnector
+     */
+    public function getThreadConnector(): ThreadConnector
+    {
+        return $this->threadConnector;
+    }
+
+    /**
      * Setup connectors
      *
      * @return void
@@ -187,6 +238,8 @@ class OpenAIApiGateway extends AbstractApiGateway
     private function setupConnectors(): void
     {
         $this->audioConnector = new AudioConnector($this->client);
+        $this->assistantConnector = new AssistantConnector($this->client);
+        $this->batchConnector = new BatchConnector($this->client);
         $this->chatConnector = new ChatConnector($this->client);
         $this->embeddingConnector = new EmbeddingConnector($this->client);
         $this->engineConnector = new EngineConnector($this->client);
@@ -195,6 +248,8 @@ class OpenAIApiGateway extends AbstractApiGateway
         $this->imageConnector = new ImageConnector($this->client);
         $this->modelConnector = new ModelConnector($this->client);
         $this->moderationConnector = new ModerationConnector($this->client);
+        $this->realtimeConnector = new RealtimeConnector($this->client);
+        $this->threadConnector = new ThreadConnector($this->client);
         $this->usageConnector = new UsageConnector($this->client);
     }
 
@@ -211,6 +266,7 @@ class OpenAIApiGateway extends AbstractApiGateway
         $this->params['host'] = ApiInfos::HOST;
         $this->params['version'] = ApiInfos::VERSION;
         $this->params['api_key'] = $this->apiKey;
+        $this->params['admin_api_key'] = $this->adminApiKey;
         $this->params['organisation'] = $this->organisation;
         $this->params['availability'] = $this->availability;
     }
