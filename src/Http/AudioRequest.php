@@ -25,16 +25,6 @@ class AudioRequest extends ApiRequest
     }
 
     /**
-     * PreExecute callback
-     *
-     * @return void
-     */
-    public function preExecute(): void
-    {
-        // Disable parent behaviour
-    }
-
-    /**
      * Build Uri
      *
      * @return void
@@ -46,18 +36,6 @@ class AudioRequest extends ApiRequest
         if (!empty($this->endpoint)) {
             $this->uri = sprintf('%s/%s', $this->uri, $this->endpoint);
         }
-    }
-
-    /**
-     * Build headers
-     *
-     * @return void
-     */
-    protected function buildHeaders(): void
-    {
-        parent::buildHeaders();
-
-        unset($this->headers['Content-Type']);
     }
 
     /**
