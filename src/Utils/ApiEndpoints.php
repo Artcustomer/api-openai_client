@@ -37,6 +37,7 @@ class ApiEndpoints
     public const RUNS = 'runs';
     public const SERVICE_ACCOUNTS = 'service_accounts';
     public const SESSIONS = 'sessions';
+    public const SPEECH = 'speech';
     public const STEPS = 'steps';
     public const THREADS = 'threads';
     public const TRANSCRIPTIONS = 'transcriptions';

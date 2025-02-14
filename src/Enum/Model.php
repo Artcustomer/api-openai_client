@@ -37,8 +37,12 @@ class Model
     public const GPT_4O = 'gpt-4o';
     public const GPT_4O_2024_05_13 = 'gpt-4o-2024-05-13';
     public const GPT_4O_2024_08_06 = 'gpt-4o-2024-08-06';
+    public const GPT_4_O_AUDIO_PREVIEW = 'gpt-4o-audio-preview';
+    public const GPT_4_O_AUDIO_PREVIEW_2024_12_17 = 'gpt-4o-audio-preview-2024-12-17';
     public const GPT_4O_MINI = 'gpt-4o-mini';
     public const GPT_4O_MINI_2024_07_18 = 'gpt-4o-mini-2024-07-18';
+    public const GPT_4O_MINI_AUDIO_PREVIEW = 'gpt-4o-mini-audio-preview';
+    public const GPT_4O_MINI_AUDIO_PREVIEW_2024_12_17 = 'gpt-4o-mini-audio-preview-2024-12-17';
     public const GPT_4O_MINI_REALTIME_PREVIEW_2024_12_17 = 'gpt-4o-mini-realtime-preview-2024-12-17';
     public const GPT_4O_REALTIME_PREVIEW = 'gpt-4o-realtime-preview';
     public const GPT_4O_REALTIME_PREVIEW_2024_10_01 = 'gpt-4o-realtime-preview-2024-10-01';

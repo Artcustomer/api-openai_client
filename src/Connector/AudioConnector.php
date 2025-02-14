@@ -60,4 +60,22 @@ class AudioConnector extends AbstractConnector
 
         return $this->client->executeRequest($request);
     }
+
+    /**
+     * Generates audio from the input text.
+     *
+     * @param array $params
+     * @return IApiResponse
+     */
+    public function createSpeech(array $params): IApiResponse
+    {
+        $data = [
+            'method' => ApiMethodTypes::POST,
+            'endpoint' => ApiEndpoints::SPEECH,
+            'body' => $params
+        ];
+        $request = $this->client->getRequestFactory()->instantiate(AudioRequest::class, [$data]);
+
+        return $this->client->executeRequest($request);
+    }
 }
