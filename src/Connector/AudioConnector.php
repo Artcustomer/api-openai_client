@@ -38,7 +38,7 @@ class AudioConnector extends AbstractConnector
             'endpoint' => ApiEndpoints::TRANSCRIPTIONS,
             'body' => $params
         ];
-        $request = $this->client->getRequestFactory()->instantiate(AudioRequest::class, [$data]);
+        $request = $this->client->getRequestFactory()->instantiate(AudioRequest::class, [$data, true]);
 
         return $this->client->executeRequest($request);
     }
@@ -56,7 +56,7 @@ class AudioConnector extends AbstractConnector
             'endpoint' => ApiEndpoints::TRANSLATIONS,
             'body' => $params
         ];
-        $request = $this->client->getRequestFactory()->instantiate(AudioRequest::class, [$data]);
+        $request = $this->client->getRequestFactory()->instantiate(AudioRequest::class, [$data, true]);
 
         return $this->client->executeRequest($request);
     }

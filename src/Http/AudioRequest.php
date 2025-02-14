@@ -10,18 +10,35 @@ use Artcustomer\OpenAIClient\Utils\ApiEndpoints;
 class AudioRequest extends ApiRequest
 {
 
+    protected bool $hasFile = false;
+
     /**
      * Constructor
      *
      * @param array $data
+     * @param bool $hasFile
      */
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], bool $hasFile = false)
     {
         parent::__construct();
+
+        $this->hasFile = $hasFile;
 
         $this->initParams();
         $this->hydrate($data);
         $this->extendParams();
+    }
+
+    /**
+     * PreExecute callback
+     *
+     * @return void
+     */
+    public function preExecute(): void
+    {
+        if (!$this->hasFile) {
+            parent::preExecute();
+        }
     }
 
     /**
@@ -45,6 +62,10 @@ class AudioRequest extends ApiRequest
      */
     private function initParams(): void
     {
+        if ($this->hasFile) {
+            $this->contentType = null;
+        }
+
         $this->body = $this->body ?? [];
     }
 
@@ -55,7 +76,10 @@ class AudioRequest extends ApiRequest
      */
     private function extendParams(): void
     {
-        if (isset($this->body['file'])) {
+        if (
+            $this->hasFile &&
+            isset($this->body['file'])
+        ) {
             $bodyFile = $this->body['file'];
             $curlFile = null;
 

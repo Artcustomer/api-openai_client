@@ -20,6 +20,8 @@ class ApiRequest extends CurlApiRequest
     protected string $organisation;
     protected string $uriBase;
 
+    protected ?string $contentType = null;
+
     /**
      * Constructor
      */
@@ -28,6 +30,7 @@ class ApiRequest extends CurlApiRequest
         parent::__construct();
 
         $this->secured = true;
+        $this->contentType = 'application/json';
     }
 
     /**
@@ -109,7 +112,10 @@ class ApiRequest extends CurlApiRequest
      */
     protected function buildHeaders(): void
     {
-        $this->headers['Content-Type'] = 'application/json';
+        if (!is_null($this->contentType)) {
+            $this->headers['Content-Type'] = $this->contentType;
+        }
+
         $this->headers['Authorization'] = $this->getAuthorization();
 
         if (!empty($this->organisation)) {
