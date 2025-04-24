@@ -49,6 +49,7 @@ class Model
     public const GPT_4O_REALTIME_PREVIEW_2024_12_17 = 'gpt-4o-realtime-preview-2024-12-17';
     public const GPT_4O_SEARCH_PREVIEW = 'gpt-4o-search-preview';
     public const GPT_4O_SEARCH_PREVIEW_2025_03_11 = 'gpt-4o-search-preview-2025-03-11';
+    public const GPT_IMAGE_1 = 'gpt-image-1';
     public const O1 = 'o1';
     public const O1_2024_12_17 = 'o1-2024-12-17';
     public const O1_MINI = 'o1-mini';
@@ -176,7 +177,8 @@ class Model
     {
         return [
             self::DALL_E_2,
-            self::DALL_E_3
+            self::DALL_E_3,
+            self::GPT_IMAGE_1
         ];
     }
 

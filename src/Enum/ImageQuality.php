@@ -8,6 +8,10 @@ namespace Artcustomer\OpenAIClient\Enum;
 class ImageQuality
 {
 
+    public const AUTO = 'auto';
+    public const LOW = 'low';
+    public const MEDIUM = 'medium';
+    public const HIGH = 'high';
     public const HD = 'hd';
     public const STANDARD = 'standard';
 
