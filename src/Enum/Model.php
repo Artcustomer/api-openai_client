@@ -49,13 +49,20 @@ class Model
     public const GPT_4O_REALTIME_PREVIEW_2024_12_17 = 'gpt-4o-realtime-preview-2024-12-17';
     public const GPT_4O_SEARCH_PREVIEW = 'gpt-4o-search-preview';
     public const GPT_4O_SEARCH_PREVIEW_2025_03_11 = 'gpt-4o-search-preview-2025-03-11';
+    public const GPT_5 = 'gpt-5';
+    public const GPT_5_CHAT_LATEST = 'gpt-5-chat-latest';
+    public const GPT_5_MINI = 'gpt-5-mini';
+    public const GPT_5_NANO = 'gpt-5-nano';
     public const GPT_IMAGE_1 = 'gpt-image-1';
+    public const GPT_OSS_20B = 'gpt-oss-20b';
+    public const GPT_OSS_120B = 'gpt-oss-120b';
     public const O1 = 'o1';
     public const O1_2024_12_17 = 'o1-2024-12-17';
     public const O1_MINI = 'o1-mini';
     public const O1_MINI_2024_09_12 = 'o1-mini-2024-09-12';
     public const O1_PRO = 'o1-pro';
     public const O1_PRO_2025_03_19 = 'o1-pro-2025-03-19';
+    public const O3_DEEP_RESEARCH = 'o3-deep-research';
     public const O3_MINI = 'o3-mini';
     public const O3_MINI_2025_01_31 = 'o3-mini-2025-01-31';
     public const ONMI_MODERATION_2024_09_26 = 'omni-moderation-2024-09-26';
@@ -99,7 +106,11 @@ class Model
             self::GPT_4_32K_0613,
             self::GPT_4_TURBO,
             self::GPT_4_TURBO_PREVIEW,
-            self::GPT_4_TURBO_2024_04_09
+            self::GPT_4_TURBO_2024_04_09,
+            self::GPT_5,
+            self::GPT_5_CHAT_LATEST,
+            self::GPT_5_MINI,
+            self::GPT_5_NANO,
         ];
     }
 
@@ -223,6 +234,19 @@ class Model
         return [
             self::GPT_4O_REALTIME_PREVIEW,
             self::GPT_4O_REALTIME_PREVIEW_2024_10_01
+        ];
+    }
+
+    /**
+     * Get open weight models
+     *
+     * @return string[]
+     */
+    public static function openWeight(): array
+    {
+        return [
+            self::GPT_OSS_20B,
+            self::GPT_OSS_120B
         ];
     }
 }
